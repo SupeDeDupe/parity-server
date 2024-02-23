@@ -194,17 +194,39 @@ const columnsMeta = [
   }
 ]
 
+export interface StatsTableData {
+  name: string;
+  team: string;
+  goals: number;
+  assists: number;
+  second_assists: number;
+  d_blocks: number;
+  catches: number;
+  completions: number;
+  throw_aways: number;
+  threw_drops: number;
+  o_points_for: number;
+  o_points_against: number;
+  d_points_for: number;
+  d_points_against: number;
+  pay: number;
+  holds: string;
+  breaks: string;
+  // index
+  [key: string]: number | string;
+}
 
-function StatsTable(props: {stats: Stats}) {
-  const stats = props.stats
-  const statsArray = map(keys(stats), (k) => {
-    return {
-      ...stats[k],
-      name: k,
-      holds: stats[k].o_points_for + '/' + (stats[k].o_points_against + stats[k].o_points_for),
-      breaks: stats[k].d_points_for + '/' + (stats[k].d_points_against + stats[k].d_points_for)
-    }
-  });
+function StatsTable(props: {statsArray: StatsTableData[]}) {
+  const statsArray = props.statsArray;
+  // const stats = props.stats
+  // const statsArray = map(keys(stats), (k) => {
+  //   return {
+  //     ...stats[k],
+  //     name: k,
+  //     holds: stats[k].o_points_for + '/' + (stats[k].o_points_against + stats[k].o_points_for),
+  //     breaks: stats[k].d_points_for + '/' + (stats[k].d_points_against + stats[k].d_points_for)
+  //   }
+  // });
 
   return (
     <div className="responsive-table">
